@@ -20,4 +20,4 @@ COPY php.conf /etc/httpd/conf.d/php.conf
 
 EXPOSE 80
 
-CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+CMD ["sleep", "infinity"]
