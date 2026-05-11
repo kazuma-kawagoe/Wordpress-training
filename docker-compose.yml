@@ -1,0 +1,34 @@
+services:
+  web:
+    build: ./web
+    container_name: web
+    ports:
+      - "8080:80"
+    networks:
+      wp_net:
+        ipv4_address: 10.10.10.11
+    depends_on:
+      - ap
+
+  ap:
+    build: ./ap
+    container_name: ap
+    networks:
+      wp_net:
+        ipv4_address: 10.10.10.12
+    depends_on:
+      - db
+
+  db:
+    build: ./db
+    container_name: db
+    networks:
+      wp_net:
+        ipv4_address: 10.10.10.13
+
+networks:
+  wp_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.10.0/24
