@@ -3,8 +3,15 @@ FROM amazonlinux:2023
 # 必要パッケージのインストール
 RUN dnf update -y --allowerasing && \
     dnf install -y httpd wget tar gzip \
+    python3 \
     vim-minimal procps-ng iproute less && \
     dnf clean all
+
+# systemctl 互換スクリプトの導入（※ dnf の後に配置すること）
+RUN wget -q https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl3.py \
+    -O /usr/bin/systemctl && \
+    chmod +x /usr/bin/systemctl
+
 # WordPressのダウンロードと配置
 RUN cd /tmp && \
     wget -q https://wordpress.org/latest.tar.gz && \
@@ -18,6 +25,8 @@ RUN rm -f /etc/httpd/conf.d/welcome.conf
 # php.conf を配置（proxy:fcgi 設定）
 COPY php.conf /etc/httpd/conf.d/php.conf
 
-EXPOSE 80
+# httpd を自動起動に設定
+RUN systemctl enable httpd
 
-CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+EXPOSE 80
+CMD ["/usr/bin/systemctl"]
