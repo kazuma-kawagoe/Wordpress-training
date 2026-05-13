@@ -3,8 +3,10 @@ FROM amazonlinux:2023
 # 必要パッケージのインストール
 RUN dnf update -y --allowerasing && \
     dnf install -y httpd wget tar gzip \
-    vim-minimal procps-ng iproute less && \
+    vim-minimal procps-ng iproute less \
+    systemd && \
     dnf clean all
+
 # WordPressのダウンロードと配置
 RUN cd /tmp && \
     wget -q https://wordpress.org/latest.tar.gz && \
@@ -15,9 +17,10 @@ RUN cd /tmp && \
 # デフォルトのウェルカムページを削除
 RUN rm -f /etc/httpd/conf.d/welcome.conf
 
-# php.conf を配置（proxy:fcgi 設定）
+# php.conf を配置
 COPY php.conf /etc/httpd/conf.d/php.conf
 
-EXPOSE 80
+# httpdの自動起動を無効化（問1のエラー）
+RUN systemctl disable httpd
 
-CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+CMD ["/sbin/init"]

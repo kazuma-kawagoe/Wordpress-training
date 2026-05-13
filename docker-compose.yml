@@ -7,6 +7,10 @@ services:
     networks:
       wp_net:
         ipv4_address: 10.10.10.11
+    privileged: true
+    tmpfs:
+      - /run
+      - /sys/fs/cgroup
     depends_on:
       - ap
 
@@ -16,6 +20,10 @@ services:
     networks:
       wp_net:
         ipv4_address: 10.10.10.12
+    privileged: true
+    tmpfs:
+      - /run
+      - /sys/fs/cgroup
     depends_on:
       - db
 
@@ -25,6 +33,10 @@ services:
     networks:
       wp_net:
         ipv4_address: 10.10.10.13
+    privileged: true
+    tmpfs:
+      - /run
+      - /sys/fs/cgroup
 
 networks:
   wp_net:
