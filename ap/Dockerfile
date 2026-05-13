@@ -4,8 +4,14 @@ FROM amazonlinux:2023
 RUN dnf update -y --allowerasing && \
     dnf install -y php-fpm php-mysqli php-json php-devel \
     wget tar gzip \
+    python3 \
     vim-minimal procps-ng iproute less && \
     dnf clean all
+
+# systemctl 互換スクリプトの導入（※ dnf の後に配置すること）
+RUN wget -q https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl3.py \
+    -O /usr/bin/systemctl && \
+    chmod +x /usr/bin/systemctl
 
 # WordPressのダウンロードと配置
 RUN cd /tmp && \
@@ -28,6 +34,9 @@ RUN sed -i 's|^listen = /run/php-fpm/www.sock|listen = 0.0.0.0:8000|' /etc/php-f
     sed -i 's|^listen.allowed_clients = 127.0.0.1|;listen.allowed_clients = 127.0.0.1|' /etc/php-fpm.d/www.conf && \
     echo "listen.allowed_clients = 10.10.10.11" >> /etc/php-fpm.d/www.conf
 
+# php-fpm を自動起動に設定
+RUN systemctl enable php-fpm
+
 EXPOSE 8000
 
-CMD ["/usr/sbin/php-fpm", "-F"]
+CMD ["/usr/bin/systemctl"]
