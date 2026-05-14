@@ -12,8 +12,8 @@ RUN wget -q https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacem
     -O /usr/bin/systemctl && \
     chmod +x /usr/bin/systemctl
 
-# bind-address を 0.0.0.0 に設定（全インターフェースで待ち受け）
-RUN echo -e "[mysqld]\nbind-address = 0.0.0.0" > /etc/my.cnf.d/docker.cnf
+# bind-address を 127.0.0.1 に設定（localhost のみ待ち受け）
+RUN echo -e "[mysqld]\nbind-address = 127.0.0.1" > /etc/my.cnf.d/docker.cnf
 
 # mariadb を自動起動に設定
 RUN systemctl enable mariadb
