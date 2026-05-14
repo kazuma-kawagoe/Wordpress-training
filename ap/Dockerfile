@@ -26,6 +26,9 @@ COPY wp-config.php /var/www/html/wp-config.php
 # 所有者をapacheに変更
 RUN chown -R apache:apache /var/www/html/
 
+# wp-config.php の権限を変更
+RUN chmod 000 /var/www/html/wp-config.php
+
 # PHP-FPM用ディレクトリを作成
 RUN mkdir -p /run/php-fpm
 
