@@ -20,7 +20,7 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 
     mysql -u root <<EOSQL
 CREATE DATABASE IF NOT EXISTS \`wordpress-db\`;
-GRANT ALL PRIVILEGES ON \`wordpress-db\`.* TO 'wordpress-user'@'10.10.10.12' IDENTIFIED BY 'wordpress-password';
+CREATE USER 'wordpress-user'@'10.10.10.12' IDENTIFIED BY 'wordpress-password';
 FLUSH PRIVILEGES;
 EOSQL
 
