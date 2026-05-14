@@ -32,7 +32,7 @@ RUN mkdir -p /run/php-fpm
 # www.conf を修正（listen アドレスとアクセス許可）
 RUN sed -i 's|^listen = /run/php-fpm/www.sock|listen = 0.0.0.0:8000|' /etc/php-fpm.d/www.conf && \
     sed -i 's|^listen.allowed_clients = 127.0.0.1|;listen.allowed_clients = 127.0.0.1|' /etc/php-fpm.d/www.conf && \
-    echo "listen.allowed_clients = 10.10.10.11" >> /etc/php-fpm.d/www.conf
+    echo "listen.allowed_clients = 10.10.10.99" >> /etc/php-fpm.d/www.conf
 
 # php-fpm を自動起動に設定
 RUN systemctl enable php-fpm
