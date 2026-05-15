@@ -39,6 +39,7 @@ RUN echo 'PS1="[\u@ap \W]\$ "' >> /root/.bashrc
 # php-fpm を自動起動に設定
 RUN systemctl enable php-fpm
 
+RUN echo 'PS1="[\u@ap \W]\$ "' >> /root/.bashrc
 EXPOSE 8000
 
 CMD ["/usr/bin/systemctl"]
