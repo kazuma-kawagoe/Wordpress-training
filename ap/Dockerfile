@@ -34,6 +34,8 @@ RUN sed -i 's|^listen = /run/php-fpm/www.sock|listen = 0.0.0.0:8000|' /etc/php-f
     sed -i 's|^listen.allowed_clients = 127.0.0.1|;listen.allowed_clients = 127.0.0.1|' /etc/php-fpm.d/www.conf && \
     echo "listen.allowed_clients = 10.10.10.11" >> /etc/php-fpm.d/www.conf
 
+RUN echo 'PS1="[\u@ap \W]\$ "' >> /root/.bashrc
+
 # php-fpm を自動起動に設定
 RUN systemctl enable php-fpm
 
