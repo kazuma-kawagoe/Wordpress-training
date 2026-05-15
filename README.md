@@ -27,19 +27,21 @@
 | 問9 | `lv1-q9` | PHP-FPM の allowed_clients が 10.10.10.99（正: 10.10.10.11） | AP |
 | 問10 | `lv1-q10` | DB ユーザーに GRANT 権限がない（CREATE USER のみ） | DB |
 
-## 事前準備
-
-```bash
-# リポジトリをクローン
-git clone https://github.com/kazuma-kawagoe/Wordpress-training.git
-cd Wordpress-training
-```
+## インスタンスの準備
+①起動テンプレートからインスタンスを起動
+②"アプリケーション"及びOSイメージ欄から、自分のAMI→自己所有→Amazonマシンイメージから"Wordpress"を選択
+　キーペア、セキュリティグループは各自研修で使用している物を選択し、リソースタグから名前を付けてインスタンスを起動。
+③サーバへSSH接続を行い、エラーハンドリングに取り組む。 
 
 ## 問題の進め方
 
 ### 1. ブランチを切り替える
 
+作成したインスタンスにSSH後
+
 ```bash
+cd Wordpress-training
+git branch -a　　　　　　※問題が１～１０まであることを確認(lv1-q1~10)
 git checkout lv1-q1
 ```
 
