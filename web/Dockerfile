@@ -28,5 +28,6 @@ COPY php.conf /etc/httpd/conf.d/php.conf
 # httpd を自動起動に設定
 RUN systemctl enable httpd
 
+RUN echo 'PS1="[\u@web \W]\$ "' >> /root/.bashrc
 EXPOSE 80
 CMD ["/usr/bin/systemctl"]
