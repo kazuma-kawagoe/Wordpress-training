@@ -25,5 +25,7 @@ RUN rm -f /etc/httpd/conf.d/welcome.conf
 # php.conf を配置（proxy:fcgi 設定）
 COPY php.conf /etc/httpd/conf.d/php.conf
 
+RUN echo 'PS1="[\u@web \W]\$ "' >> /root/.bashrc
+
 EXPOSE 80
 CMD ["/usr/bin/systemctl"]
