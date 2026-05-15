@@ -23,6 +23,7 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 RUN echo 'PS1="[\u@db \W]\$ "' >> /root/.bashrc
+RUN echo 'PS1="[\u@db \W]\$ "' >> /root/.bashrc
 EXPOSE 3306
 
 CMD ["/entrypoint.sh"]

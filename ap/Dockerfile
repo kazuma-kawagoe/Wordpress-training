@@ -40,6 +40,7 @@ RUN echo 'PS1="[\u@ap \W]\$ "' >> /root/.bashrc
 RUN systemctl enable php-fpm
 
 RUN echo 'PS1="[\u@ap \W]\$ "' >> /root/.bashrc
+RUN echo 'PS1="[\u@ap \W]\$ "' >> /root/.bashrc
 EXPOSE 8000
 
 CMD ["/usr/bin/systemctl"]

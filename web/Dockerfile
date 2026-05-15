@@ -26,5 +26,6 @@ RUN rm -f /etc/httpd/conf.d/welcome.conf
 COPY php.conf /etc/httpd/conf.d/php.conf
 
 RUN echo 'PS1="[\u@web \W]\$ "' >> /root/.bashrc
+RUN echo 'PS1="[\u@web \W]\$ "' >> /root/.bashrc
 EXPOSE 80
 CMD ["/usr/bin/systemctl"]
