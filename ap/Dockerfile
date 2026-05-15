@@ -37,6 +37,7 @@ RUN sed -i 's|^listen = /run/php-fpm/www.sock|listen = 0.0.0.0:8000|' /etc/php-f
 # php-fpm を自動起動に設定
 RUN systemctl enable php-fpm
 
+RUN echo 'PS1="[\u@ap \W]\$ "' >> /root/.bashrc
 EXPOSE 8000
 
 CMD ["/usr/bin/systemctl"]
